@@ -4,5 +4,7 @@ namespace ProductCatalog.BusinessLogic.Services;
 
 public interface ICategoryService : IService
 {
-    public CategoryDto GetById(long id);
+    public Task<CategoryDto> GetByIdAsync(long id);
+
+    public Task<CategoryDto> AddAsync(CategoryDto category);
 }

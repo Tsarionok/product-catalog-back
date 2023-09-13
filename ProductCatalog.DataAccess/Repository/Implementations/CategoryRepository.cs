@@ -1,16 +1,44 @@
+using Microsoft.EntityFrameworkCore;
+using ProductCatalog.DataAccess.Context;
 using ProductCatalog.DataAccess.Entities;
 
 namespace ProductCatalog.DataAccess.Repository.Implementations;
 
 public class CategoryRepository : ICategoryRepository
 {
-    public Category GetById(long id)
+    private ProductCatalogContext _context;
+
+    public CategoryRepository(ProductCatalogContext context)
     {
-        // TODO: remove mock data
-        return new Category()
+        _context = context;
+    }
+
+
+    public async Task<Category> GetByIdAsync(long id) =>
+        (await _context.Categories.FirstOrDefaultAsync(x => x.Id == id))!;
+
+    public async Task<IEnumerable<Category>> GetAllAsync()
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Category> AddAsync(Category category)
+    {
+        await using (_context)
         {
-            Id = 123,
-            Name = "Mocked category"
-        };
+            var categoryResult = await _context.Categories.AddAsync(category);
+            await _context.SaveChangesAsync();
+            return categoryResult.Entity;
+        }
+    }
+
+    public async Task<Category> UpdateAsync(Category category)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<Category> DeleteByIdAsync(long id)
+    {
+        throw new NotImplementedException();
     }
 }

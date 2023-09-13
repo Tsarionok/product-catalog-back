@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using ProductCatalog.BusinessLogic.DataTransferObjects;
 using ProductCatalog.BusinessLogic.Services;
+using ProductCatalog.WebApi.ApiModels;
 
 namespace ProductCatalog.WebApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class CategoryController : ControllerBase
 {
     private readonly ILogger<CategoryController> _logger;
@@ -16,14 +18,29 @@ public class CategoryController : ControllerBase
         _categoryService = categoryService;
     }
 
-    [HttpGet(Name = "GetCategory")]
-    public Category Get(long id)
+    [HttpGet("{id:long}")]
+    public async Task<CategoryApiModel> GetAsync(long id)
     {
-        var category = _categoryService.GetById(id);
+        var category = await _categoryService.GetByIdAsync(id);
 
-        return new Category()
+        return new CategoryApiModel()
         {
             Id = category.Id,
+            Name = category.Name
+        };
+    }
+
+    [HttpPost]
+    public async Task<CategoryApiModel> AddAsync(CategoryApiModel category)
+    {
+        var resultCategory = await _categoryService.AddAsync(new CategoryDto()
+        {
+            Id = category.Id,
+            Name = category.Name
+        });
+        return new CategoryApiModel()
+        {
+            Id = resultCategory.Id,
             Name = category.Name
         };
     }
