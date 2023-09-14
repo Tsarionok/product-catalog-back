@@ -44,14 +44,41 @@ public class CategoryController : ControllerBase
     [HttpPost]
     public async Task<CategoryApiModel> AddAsync(CategoryApiModel category)
     {
-        var resultCategory = await _categoryService.AddAsync(new CategoryDto()
+        var categoryResult = await _categoryService.AddAsync(new CategoryDto()
         {
             Id = category.Id,
             Name = category.Name
         });
         return new CategoryApiModel()
         {
-            Id = resultCategory.Id,
+            Id = categoryResult.Id,
+            Name = categoryResult.Name
+        };
+    }
+
+    [HttpPut]
+    public async Task<CategoryApiModel> UpdateAsync(CategoryApiModel category)
+    {
+        var categoryResult = await _categoryService.UpdateAsync(new CategoryDto()
+        {
+            Id = category.Id,
+            Name = category.Name
+        });
+        return new CategoryApiModel()
+        {
+            Id = categoryResult.Id,
+            Name = categoryResult.Name
+        };
+    }
+
+    [HttpDelete("{id:long}")]
+    public async Task<CategoryApiModel> DeleteByIdAsync(long id)
+    {
+        var category = await _categoryService.DeleteByIdAsync(id);
+
+        return new CategoryApiModel()
+        {
+            Id = category.Id,
             Name = category.Name
         };
     }

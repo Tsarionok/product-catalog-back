@@ -6,7 +6,7 @@ namespace ProductCatalog.BusinessLogic.Services.Implementations;
 
 public class CategoryService : ICategoryService
 {
-    private ICategoryRepository _repository;
+    private readonly ICategoryRepository _repository;
 
     public CategoryService(ICategoryRepository repository)
     {
@@ -17,7 +17,6 @@ public class CategoryService : ICategoryService
     {
         var category = await _repository.GetByIdAsync(id);
         
-        // TODO: Include automapper
         return new CategoryDto()
         {
             Id = category.Id,
@@ -35,9 +34,26 @@ public class CategoryService : ICategoryService
         });
     }
 
-    public async Task<CategoryDto> AddAsync(CategoryDto category)
+    public async Task<CategoryDto> AddAsync(CategoryDto category) =>
+        await MapResult(_repository.AddAsync, category);
+
+    public async Task<CategoryDto> UpdateAsync(CategoryDto category) =>
+        await MapResult(_repository.UpdateAsync, category);
+
+    public async Task<CategoryDto> DeleteByIdAsync(long id)
     {
-        var categoryResult = await _repository.AddAsync(new Category()
+        var category = await _repository.DeleteByIdAsync(id);
+        
+        return new CategoryDto()
+        {
+            Id = category.Id,
+            Name = category.Name
+        };
+    }
+
+    private async Task<CategoryDto> MapResult(Func<Category, Task<Category>> operationAsync, CategoryDto category)
+    {
+        var categoryResult = await operationAsync(new Category()
         {
             Id = category.Id,
             Name = category.Name
