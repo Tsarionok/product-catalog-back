@@ -29,6 +29,17 @@ public class CategoryController : ControllerBase
             Name = category.Name
         };
     }
+    
+    [HttpGet]
+    public async Task<IEnumerable<CategoryApiModel>> GetAllAsync()
+    {
+        var categories = await _categoryService.GetAllAsync();
+        return categories.Select(x => new CategoryApiModel()
+        {
+            Id = x.Id,
+            Name = x.Name
+        });
+    }
 
     [HttpPost]
     public async Task<CategoryApiModel> AddAsync(CategoryApiModel category)

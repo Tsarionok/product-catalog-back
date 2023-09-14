@@ -25,6 +25,16 @@ public class CategoryService : ICategoryService
         };
     }
 
+    public async Task<IEnumerable<CategoryDto>> GetAllAsync()
+    {
+        var categoriesResult = await _repository.GetAllAsync();
+        return categoriesResult.Select(x => new CategoryDto()
+        {
+            Id = x.Id,
+            Name = x.Name
+        });
+    }
+
     public async Task<CategoryDto> AddAsync(CategoryDto category)
     {
         var categoryResult = await _repository.AddAsync(new Category()

@@ -17,10 +17,8 @@ public class CategoryRepository : ICategoryRepository
     public async Task<Category> GetByIdAsync(long id) =>
         (await _context.Categories.FirstOrDefaultAsync(x => x.Id == id))!;
 
-    public async Task<IEnumerable<Category>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<IEnumerable<Category>> GetAllAsync() =>
+        await _context.Categories.ToListAsync();
 
     public async Task<Category> AddAsync(Category category)
     {

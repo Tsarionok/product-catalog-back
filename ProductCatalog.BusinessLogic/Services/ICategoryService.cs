@@ -6,5 +6,7 @@ public interface ICategoryService : IService
 {
     public Task<CategoryDto> GetByIdAsync(long id);
 
+    public Task<IEnumerable<CategoryDto>> GetAllAsync();
+
     public Task<CategoryDto> AddAsync(CategoryDto category);
 }
