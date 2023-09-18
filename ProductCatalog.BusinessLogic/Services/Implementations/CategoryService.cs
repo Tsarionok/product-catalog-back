@@ -1,3 +1,4 @@
+using AutoMapper;
 using ProductCatalog.BusinessLogic.DataTransferObjects;
 using ProductCatalog.DataAccess.Entities;
 using ProductCatalog.DataAccess.Repository;
@@ -7,21 +8,18 @@ namespace ProductCatalog.BusinessLogic.Services.Implementations;
 public class CategoryService : ICategoryService
 {
     private readonly ICategoryRepository _repository;
+    private readonly IMapper _mapper;
 
-    public CategoryService(ICategoryRepository repository)
+    public CategoryService(ICategoryRepository repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
     public async Task<CategoryDto> GetByIdAsync(long id)
     {
         var category = await _repository.GetByIdAsync(id);
-        
-        return new CategoryDto()
-        {
-            Id = category.Id,
-            Name = category.Name
-        };
+        return _mapper.Map<CategoryDto>(category);
     }
 
     public async Task<IEnumerable<CategoryDto>> GetAllAsync()

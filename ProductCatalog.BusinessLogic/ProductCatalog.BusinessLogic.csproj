@@ -6,11 +6,18 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
-
-
-
     <ItemGroup>
       <ProjectReference Include="..\ProductCatalog.DataAccess\ProductCatalog.DataAccess.csproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="12.0.1" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <Reference Include="ProductCatalog.DataAccess">
+        <HintPath>..\ProductCatalog.DataAccess\bin\Debug\net7.0\ProductCatalog.DataAccess.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ namespace ProductCatalog.DataAccess.Repository.Implementations;
 
 public class CategoryRepository : ICategoryRepository
 {
-    private ProductCatalogDbContext _dbContext;
+    private readonly ProductCatalogDbContext _dbContext;
 
     public CategoryRepository(ProductCatalogDbContext dbContext)
     {

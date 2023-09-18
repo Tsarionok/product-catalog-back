@@ -1,6 +1,6 @@
 namespace ProductCatalog.BusinessLogic.DataTransferObjects;
 
-public class ProductDto
+public class ProductDto : BaseDto
 {
     public required string Name { get; set; }
     
