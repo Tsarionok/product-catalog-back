@@ -6,6 +6,8 @@ public class Product : BaseEntity
     
     public Category Category { get; set; }
     
+    public long? CategoryId { get; set; }
+    
     public string Description { get; set; }
     
     public decimal Cost { get; set; }

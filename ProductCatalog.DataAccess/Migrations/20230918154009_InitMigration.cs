@@ -6,35 +6,44 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ProductCatalog.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class AddProductEntity : Migration
+    public partial class InitMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.RenameColumn(
-                name: "Code",
-                table: "Currencies",
-                newName: "code");
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "Currencies",
-                newName: "id");
+            migrationBuilder.CreateTable(
+                name: "categories",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_categories", x => x.id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
-            migrationBuilder.RenameColumn(
-                name: "MinorUnits",
-                table: "Currencies",
-                newName: "minor_units");
-
-            migrationBuilder.RenameColumn(
-                name: "Name",
-                table: "Categories",
-                newName: "name");
-
-            migrationBuilder.RenameColumn(
-                name: "Id",
-                table: "Categories",
-                newName: "id");
+            migrationBuilder.CreateTable(
+                name: "currencies",
+                columns: table => new
+                {
+                    id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    code = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    minor_units = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_currencies", x => x.id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "products",
@@ -57,9 +66,9 @@ namespace ProductCatalog.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_products", x => x.id);
                     table.ForeignKey(
-                        name: "FK_products_Categories_CategoryId",
+                        name: "FK_products_categories_CategoryId",
                         column: x => x.CategoryId,
-                        principalTable: "Categories",
+                        principalTable: "categories",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 })
@@ -75,32 +84,13 @@ namespace ProductCatalog.DataAccess.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "currencies");
+
+            migrationBuilder.DropTable(
                 name: "products");
 
-            migrationBuilder.RenameColumn(
-                name: "code",
-                table: "Currencies",
-                newName: "Code");
-
-            migrationBuilder.RenameColumn(
-                name: "id",
-                table: "Currencies",
-                newName: "Id");
-
-            migrationBuilder.RenameColumn(
-                name: "minor_units",
-                table: "Currencies",
-                newName: "MinorUnits");
-
-            migrationBuilder.RenameColumn(
-                name: "name",
-                table: "Categories",
-                newName: "Name");
-
-            migrationBuilder.RenameColumn(
-                name: "id",
-                table: "Categories",
-                newName: "Id");
+            migrationBuilder.DropTable(
+                name: "categories");
         }
     }
 }

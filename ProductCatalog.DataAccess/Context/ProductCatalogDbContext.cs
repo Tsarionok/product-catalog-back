@@ -3,9 +3,9 @@ using ProductCatalog.DataAccess.Entities;
 
 namespace ProductCatalog.DataAccess.Context;
 
-public class ProductCatalogContext : DbContext
+public class ProductCatalogDbContext : DbContext
 {
-    public ProductCatalogContext(DbContextOptions<ProductCatalogContext> options) : base(options)
+    public ProductCatalogDbContext(DbContextOptions<ProductCatalogDbContext> options) : base(options)
     {
     }
     
@@ -14,21 +14,12 @@ public class ProductCatalogContext : DbContext
     public DbSet<Currency> Currencies { get; set; }
     
     public DbSet<Product> Products { get; set; }
-    
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseMySql(
-            "server=localhost;user=root;password=root1234;database=product_catalog;", 
-            new MySqlServerVersion(new Version(8, 1, 0))
-            );
-    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         BuildCategoryEntity(modelBuilder);
         BuildCurrencyEntity(modelBuilder);
         BuildProductEntity(modelBuilder);
-        base.OnModelCreating(modelBuilder);
     }
 
     private void BuildCategoryEntity(ModelBuilder modelBuilder)
@@ -40,7 +31,8 @@ public class ProductCatalogContext : DbContext
             .Property(p => p.Id)
             .IsRequired()
             .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .UseMySqlIdentityColumn();
         
         modelBuilder.Entity<Category>()
             .Property(p => p.Name)
@@ -57,7 +49,8 @@ public class ProductCatalogContext : DbContext
             .Property(p => p.Id)
             .IsRequired()
             .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .UseMySqlIdentityColumn();
 
         modelBuilder.Entity<Currency>()
             .Property(p => p.Code)
@@ -79,12 +72,22 @@ public class ProductCatalogContext : DbContext
             .Property(p => p.Id)
             .IsRequired()
             .HasColumnName("id")
-            .ValueGeneratedOnAdd();
+            .ValueGeneratedOnAdd()
+            .UseMySqlIdentityColumn();
 
         modelBuilder.Entity<Product>()
             .Property(p => p.Name)
             .IsRequired()
             .HasColumnName("name");
+
+        modelBuilder.Entity<Product>()
+            .HasOne(p => p.Category)
+            .WithMany(p => p.Products);
+        
+        modelBuilder.Entity<Product>()
+            .Property(p => p.CategoryId)
+            .IsRequired(false)
+            .HasColumnName("category_id");
 
         modelBuilder.Entity<Product>()
             .Property(p => p.Cost)
