@@ -9,5 +9,6 @@ public class ApiModelsMappingProfile : Profile
     {
         CreateMap<CategoryDto, CategoryApiModel>().ReverseMap();
         CreateMap<ProductDto, ProductApiModel>().ReverseMap();
+        CreateMap<AddProductApiModel, AddProductDto>().ReverseMap();
     }
 }

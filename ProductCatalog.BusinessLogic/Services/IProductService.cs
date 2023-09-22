@@ -8,7 +8,7 @@ public interface IProductService : IService
 
     public Task<IEnumerable<ProductDto>> GetAllAsync();
 
-    public Task<ProductDto> AddAsync(ProductDto product);
+    public Task<ProductDto> AddAsync(AddProductDto product);
 
     public Task<ProductDto> UpdateAsync(ProductDto product);
 

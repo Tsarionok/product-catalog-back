@@ -26,10 +26,17 @@ public class ProductController : ControllerBase
         return _mapper.Map<ProductApiModel>(productResult);
     }
 
-    [HttpPost]
-    public async Task<ProductApiModel> AddAsync(ProductApiModel product)
+    [HttpGet]
+    public async Task<IEnumerable<ProductApiModel>> GetAsync()
     {
-        var productResult = await _service.AddAsync(_mapper.Map<ProductDto>(product));
+        var productsResult = await _service.GetAllAsync();
+        return _mapper.Map<IEnumerable<ProductApiModel>>(productsResult);
+    }
+
+    [HttpPost]
+    public async Task<ProductApiModel> AddAsync(AddProductApiModel product)
+    {
+        var productResult = await _service.AddAsync(_mapper.Map<AddProductDto>(product));
         return _mapper.Map<ProductApiModel>(productResult);
     }
 }
