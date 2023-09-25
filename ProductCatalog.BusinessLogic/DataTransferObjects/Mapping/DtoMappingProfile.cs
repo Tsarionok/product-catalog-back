@@ -9,5 +9,6 @@ public class DtoMappingProfile : Profile
     {
         CreateMap<Category, CategoryDto>().ReverseMap();
         CreateMap<Product, ProductDto>().ReverseMap();
+        CreateMap<Currency, CurrencyDto>().ReverseMap();
     }
 }
