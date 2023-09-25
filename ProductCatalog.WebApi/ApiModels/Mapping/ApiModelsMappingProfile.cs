@@ -10,5 +10,7 @@ public class ApiModelsMappingProfile : Profile
         CreateMap<CategoryDto, CategoryApiModel>().ReverseMap();
         CreateMap<ProductDto, ProductApiModel>().ReverseMap();
         CreateMap<AddProductApiModel, AddProductDto>().ReverseMap();
+        CreateMap<CurrencyApiModel, CurrencyDto>().ReverseMap();
+        CreateMap<AddCurrencyApiModel, CurrencyDto>().ReverseMap();
     }
 }
