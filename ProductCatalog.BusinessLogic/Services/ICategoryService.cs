@@ -12,5 +12,5 @@ public interface ICategoryService : IService
 
     public Task<CategoryDto> UpdateAsync(CategoryDto category);
 
-    public Task<CategoryDto> DeleteByIdAsync(long id);
+    public Task<CategoryDto> DeleteCascadeByIdAsync(long id);
 }

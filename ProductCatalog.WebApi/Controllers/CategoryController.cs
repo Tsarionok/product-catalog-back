@@ -74,7 +74,7 @@ public class CategoryController : ControllerBase
     [HttpDelete("{id:long}")]
     public async Task<CategoryApiModel> DeleteByIdAsync(long id)
     {
-        var category = await _categoryService.DeleteByIdAsync(id);
+        var category = await _categoryService.DeleteCascadeByIdAsync(id);
 
         return new CategoryApiModel()
         {

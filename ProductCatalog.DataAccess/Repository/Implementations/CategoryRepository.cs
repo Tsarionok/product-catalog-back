@@ -33,8 +33,13 @@ public class CategoryRepository : ICategoryRepository
         return await GetByIdAsync(category.Id);
     }
 
-    public async Task<Category> DeleteByIdAsync(long id)
+    public async Task<Category> DeleteCascadeByIdAsync(long id)
     {
+        var removableProducts = await _dbContext.Products.Where(x => x.CategoryId == id).ToListAsync();
+        foreach (var product in removableProducts)
+        {
+            _dbContext.Products.Remove(product);
+        }
         var categoryResult = _dbContext.Categories.Remove(await GetByIdAsync(id)).Entity;
         await _dbContext.SaveChangesAsync();
         return categoryResult;

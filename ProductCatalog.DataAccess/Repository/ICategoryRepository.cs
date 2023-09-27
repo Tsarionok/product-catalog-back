@@ -12,5 +12,5 @@ public interface ICategoryRepository : IRepository
 
     public Task<Category> UpdateAsync(Category category);
 
-    public Task<Category> DeleteByIdAsync(long id);
+    public Task<Category> DeleteCascadeByIdAsync(long id);
 }

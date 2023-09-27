@@ -7,24 +7,24 @@ namespace ProductCatalog.BusinessLogic.Services.Implementations;
 
 public class CategoryService : ICategoryService
 {
-    private readonly ICategoryRepository _repository;
+    private readonly ICategoryRepository _categoryRepository;
     private readonly IMapper _mapper;
 
-    public CategoryService(ICategoryRepository repository, IMapper mapper)
+    public CategoryService(ICategoryRepository categoryRepository, IMapper mapper)
     {
-        _repository = repository;
+        _categoryRepository = categoryRepository;
         _mapper = mapper;
     }
 
     public async Task<CategoryDto> GetByIdAsync(long id)
     {
-        var category = await _repository.GetByIdAsync(id);
+        var category = await _categoryRepository.GetByIdAsync(id);
         return _mapper.Map<CategoryDto>(category);
     }
 
     public async Task<IEnumerable<CategoryDto>> GetAllAsync()
     {
-        var categoriesResult = await _repository.GetAllAsync();
+        var categoriesResult = await _categoryRepository.GetAllAsync();
         return categoriesResult.Select(x => new CategoryDto()
         {
             Id = x.Id,
@@ -33,19 +33,19 @@ public class CategoryService : ICategoryService
     }
 
     public async Task<CategoryDto> AddAsync(CategoryDto category) =>
-        await MapResult(_repository.AddAsync, category);
+        await MapResult(_categoryRepository.AddAsync, category);
 
     public async Task<CategoryDto> UpdateAsync(CategoryDto category) =>
-        await MapResult(_repository.UpdateAsync, category);
+        await MapResult(_categoryRepository.UpdateAsync, category);
 
-    public async Task<CategoryDto> DeleteByIdAsync(long id)
+    public async Task<CategoryDto> DeleteCascadeByIdAsync(long id)
     {
-        var category = await _repository.DeleteByIdAsync(id);
+        var deletedCategory = await _categoryRepository.DeleteCascadeByIdAsync(id);
         
         return new CategoryDto()
         {
-            Id = category.Id,
-            Name = category.Name
+            Id = deletedCategory.Id,
+            Name = deletedCategory.Name
         };
     }
 
