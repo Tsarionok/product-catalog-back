@@ -1,6 +1,8 @@
+using ProductCatalog.Common;
+
 namespace ProductCatalog.DataAccess.Entities;
 
-public class Currency : BaseEntity
+public class Currency : BaseModel<long>
 {
     public string Code { get; set; }
     

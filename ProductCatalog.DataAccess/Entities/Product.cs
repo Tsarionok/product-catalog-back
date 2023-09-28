@@ -1,6 +1,8 @@
+using ProductCatalog.Common;
+
 namespace ProductCatalog.DataAccess.Entities;
 
-public class Product : BaseEntity
+public class Product : BaseModel<long>
 {
     public string Name { get; set; }
     
