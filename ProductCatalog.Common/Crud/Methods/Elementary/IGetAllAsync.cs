@@ -6,5 +6,5 @@ public interface IGetAllAsync<TModel, TId> : IQuery
     where TId : struct
     where TModel : BaseModel<TId>
 {
-    IEnumerable<TModel> GetAllAsync();
+    Task<IEnumerable<TModel>> GetAllAsync();
 }

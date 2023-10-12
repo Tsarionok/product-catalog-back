@@ -6,5 +6,5 @@ public interface IUpdateAsync<TModel, TId> : ICommand
     where TId : struct
     where TModel : BaseModel<TId>
 {
-    TModel UpdateAsync(TModel entity);
+    Task<TModel> UpdateAsync(TModel entity);
 }

@@ -6,5 +6,5 @@ public interface IGetByIdAsync<TModel, TId> : IQuery
     where TId : struct
     where TModel : BaseModel<TId>
 {
-    TModel GetByIdAsync(TId id);
+    Task<TModel> GetByIdAsync(TId id);
 }

@@ -2,7 +2,7 @@ using ProductCatalog.Common.Crud.Methods.Elementary;
 
 namespace ProductCatalog.Common.Crud.Methods;
 
-public interface ICrud<TModel, TId> : 
+public interface ICrudAsync<TModel, TId> : 
     IAddAsync<TModel, TId>, 
     IGetAllAsync<TModel, TId>, 
     IGetByIdAsync<TModel, TId>, 
