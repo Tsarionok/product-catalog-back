@@ -1,12 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalog.WebApi", "ProductCatalog.WebApi\ProductCatalog.WebApi.csproj", "{4932C17C-0731-4C0F-9C89-441847BAB24C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalog.API", "ProductCatalog.API\ProductCatalog.API.csproj", "{4932C17C-0731-4C0F-9C89-441847BAB24C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalog.BusinessLogic", "ProductCatalog.BusinessLogic\ProductCatalog.BusinessLogic.csproj", "{1E778E0A-A18D-4F24-97AF-401891CE4988}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalog.Domain", "ProductCatalog.Domain\ProductCatalog.Domain.csproj", "{1E778E0A-A18D-4F24-97AF-401891CE4988}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalog.DataAccess", "ProductCatalog.DataAccess\ProductCatalog.DataAccess.csproj", "{4FF1580C-77CA-447D-834A-28961FAF398E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalog.Storage", "ProductCatalog.Storage\ProductCatalog.Storage.csproj", "{4FF1580C-77CA-447D-834A-28961FAF398E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalog.Common", "ProductCatalog.Common\ProductCatalog.Common.csproj", "{00D2D8AD-B08B-491D-8123-480602F56981}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductCatalog.Domain.Tests", "ProductCatalog.Domain.Tests\ProductCatalog.Domain.Tests.csproj", "{32429564-29D3-4AE0-80C9-37595AB341DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +32,9 @@ Global
 		{00D2D8AD-B08B-491D-8123-480602F56981}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{00D2D8AD-B08B-491D-8123-480602F56981}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{00D2D8AD-B08B-491D-8123-480602F56981}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32429564-29D3-4AE0-80C9-37595AB341DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32429564-29D3-4AE0-80C9-37595AB341DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32429564-29D3-4AE0-80C9-37595AB341DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32429564-29D3-4AE0-80C9-37595AB341DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
